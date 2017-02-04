@@ -1,0 +1,50 @@
+== Scala Hands-on Lab  
+
+Welcome to Scala Hands-on lab repository.  
+
+Here you will find all the necessary things to get started with Scala Hands-on Lab program.  
+
+== Prerequisites  
+=== IDE  
+
+* https://www.jetbrains.com/idea[IntelliJ IDEA]
+** Community/Ultimate version
+* Eclipse
+** http://scala-ide.org[Scala IDE]
+* NetBeans
+** Install Scala Plugin
+* Any text Editor
+** http://ensime.org[Ensime]
+* http://www.lightbend.com/community/core-tools/activator-and-sbt[Activator]  
+
+NOTE: Use the IDE you are familiar with.  
+
+=== IntelliJ & Scala IDE Worksheet
+
+If you are not much into working with projects in SBT, Scala IDE (Eclipse) and IntelliJ provides a Worksheet support, find more about Worksheet here
+
+* https://confluence.jetbrains.com/display/IntelliJIDEA/Working+with+Scala+Worksheet[IntelliJ Scala Worksheet]
+* https://github.com/scala-ide/scala-worksheet/wiki/Getting-Started[Scala IDE Worksheet]
+
+== Build tool  
+
+We recommend http://www.scala-sbt.org[SBT]
+
+== Setup
+
+* Feel free to `fork` this project if you like
+* `clone` this project locally in your system
+* if you know sbt and its installed in your system
+** open a Terminal and cd to this cloned folder
+** execute following command to run and test the project
+
+    sbt run test
+
+This will pull all necessary compiler,  library and run both application and test at same time.
+
+If you plan to use an IDE try to do same in there also.
+
+
+
+
+
