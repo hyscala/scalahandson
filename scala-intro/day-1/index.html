@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+          font-family: 'Yanone Kaffeesatz';
+          font-weight: 400;
+          margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+          bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+          color: rgb(249, 38, 114);
+          text-decoration: none;
+      }
+      code {
+          background: #e7e8e2;
+          border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+          float: left;
+          width: 47%;
+      }
+      .pull-right {
+          float: right;
+          width: 47%;
+      }
+      .pull-right ~ p {
+          clear: both;
+      }
+      #slideshow .slide .content code {
+          font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+          font-size: 0.9em;
+          padding: 15px;
+      }
+      .inverse {
+          background: #103a51;
+          color: #777872;
+          text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+          color: #f3f3f3;
+          line-height: 0.8em;
+      }
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+          bottom: 12px;
+          left: 20px;
+      }
+      #slide-how .slides {
+          font-size: 0.9em;
+          position: absolute;
+          top:  151px;
+          right: 140px;
+      }
+      #slide-how .slides h3 {
+          margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+          padding: 1px 20px;
+          height: 90px;
+          width: 120px;
+          -moz-box-shadow: 0 0 10px #777;
+          -webkit-box-shadow: 0 0 10px #777;
+          box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+          background: #fff;
+          position: absolute;
+          top: 20%;
+          left: 20%;
+          z-index: 1;
+      }
+      #slide-how .slides .second {
+          position: relative;
+          background: #fff;
+          z-index: 0;
+      }
+      /* Two-column layout */
+      .left-column {
+          color: #ccd6dd;
+          width: 20%;
+          font-size: 12pt;
+          /*height: 92%;*/
+          float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+      }
+      .right-column {
+          width: 75%;
+          float: right;
+          padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+
+![Scala](smooth-spiral.png "Scala")
+
+#Scala
+
+
+https://twitter.com/purijatin7
+
+---
+
+layout: false
+.left-column[
+  ## Overview
+]
+.right-column[
+Some Background:
+  
+- Working primarily in Scala since 2012
+
+- Minor contributor to Scala [Macros](http://scalamacros.org/paperstalks/2014-06-17-EasyMetaprogrammingForEveryone.pdf#page=62)
+
+- ~15k points on [Stackoverflow](http://stackoverflow.com/users/894565/jatin) primarily in Scala
+
+- Very Involved with community (SIP, SLIP, gitter channels, google groups etc)
+
+- Trainer/Consultant with Lightbend Inc
+
+- Authoring a book called `Scala Microservices` with Packt Publishers
+
+- Organizer of Scala Hyderabad Meetup [http://hyscala.in](http://hyscala.in)
+]
+
+---
+
+# Training Schedule
+
+1. Introduction to Scala
+2. Get Started
+3. REPL
+4. Data Types
+5. Object Oriented with Scala
+5. Imports & Modifiers
+6. Singleton Objects
+7. case classes
+8. Scala Collections
+
+---
+
+class: center, middle, inverse
+
+#Java is Platform Independent
+How does it achieve Platform Independence?
+
+---
+
+class: center, middle
+
+![Abstraction](ind.jpg "JVM Languages")
+
+---
+
+class: center, middle
+
+![Abstraction2](ind2.jpg "JVM Languages")
+
+[Java Opcodes- https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings](https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings)
+
+---
+
+class: center, middle
+
+![JVM Languages](jvm_lang.jpg "JVM Languages")
+
+Source of Image: [Slide Share](http://www.slideshare.net/rokon12/jvm-ecosystem-languages-and-the-future-of-jvm)
+
+
+---
+
+.left-column[
+  ## Brief History    
+]
+
+.right-column[
+      
+  <img src="martin.JPG" alt="REPL" width="50%" height="60%"/>
+  <br>
+- Martin Odersky is the author of Scala Programming Language
+- Professor at École Polytechnique Fédérale de Lausanne (EPFL) in Switzerland (also the heart of language)
+- Previously authored Generic Java (and Pizza before)
+- Author of Javac5. Implemented Generics implementation in javac  
+  ]
+
+---
+
+
+.left-column[
+  ## Intro    
+]
+.right-column[
+Elevator Pitch:
+  - Its fun
+  - Its fast
+  - It runs on a great VM (JVM)
+  - Commercially has done decent. Encouraging Signs  
+  - REPL<br><br>
+      <img src="repl.png" alt="REPL" width="100%"/>
+      <br><br>
+  - Seamless interoperability with Java  <br>
+  - Scala.js
+  - Brownie Points: Language synonymn for?
+]
+
+
+---
+
+.left-column[
+  ## Intro  
+  ## Scala? 
+]
+
+.right-column[
+  - Multi-Paradigm ([Grand Unified Theory](http://www.drdobbs.com/architecture-and-design/interview-with-scalas-martin-odersky/231001802))
+      * Pure-bred Object Oriented      
+      * Functional 
+      <br><br><br><br>
+  <img src="hangout.png" alt="REPL" width="100%"/>
+  ]
+
+
+---
+.left-column[
+  ## Intro
+  ## Get Started    
+]
+.right-column[
+REPL
+  - Read Evaluate Print Loop  
+
+```scala
+
+jatin@puri:~$ scala
+Welcome to Scala 2.12.0 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_74).
+Type in expressions for evaluation. Or try :help.
+
+scala> 1 + 2
+res0: Int = 3
+
+scala> 2 / 3.0
+res1: Double = 0.6666666666666666
+
+``` 
+  - To start repl: `scala` on command line (need to setup environment path before that)
+  - REPL reads expressions at the prompt, wraps them in an executable template, and then compiles and executes the result.
+  - Variable are available in scope
+
+```scala
+scala> res0
+res2: Int = 3
+
+scala> res1
+res3: Double = 0.6666666666666666
+
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## Get Started    
+]
+.right-column[
+REPL
+  - Read Evaluate Print Loop  
+
+```scala
+
+scala> "Hi Chennai"
+res4: String = Hi Chennai
+
+scala> "Hi" + "Chennai"
+res5: String = HiChennai
+
+scala> "Hi" + " - "+"Chennai"
+res6: String = Hi - Chennai
+
+scala> "Hi" + " - "+"Chennai " + (2 * 11)
+res7: String = Hi - Chennai 22
+
+scala> ( 1 * 2) + (3+ (4 /6))
+res8: Int = 5
+
+scala> 1/2
+res9: Int = 0
+
+scala> 1/2.0
+res10: Double = 0.5
+
+``` 
+]
+
+---
+.left-column[
+  ## Intro
+  ## Get Started    
+]
+.right-column[
+REPL
+  - Names can also be assigned to variables using `val`
+
+```scala
+scala> val a = 1
+a: Int = 1
+
+scala> 2
+res0: Int = 2
+
+scala> val c = a * res0
+c: Int = 2
+
+```
+  - Above `val` can also be thought of as `final` keyword in Java. It cannot be re-assigned
+
+```scala
+scala> val c = 23
+c: Int = 23
+
+scala> c = c+1
+<console>:12: error: reassignment to val
+       c = c+1
+
+```
+  - Also called Immutable variable
+]
+
+---
+.left-column[
+  ## Intro
+  ## Get Started    
+]
+.right-column[
+REPL
+  - Reassign values with `var`
+
+```scala
+scala> var a = 1
+a: Int = 1
+
+scala> a = a + 2
+res0: Int = 3
+
+scala> a = -1
+c: Int = -1
+
+```
+  - Above `var` can be thought of as `non-final` keyword in Java
+  - Also called Mutable Variable
+  - Note just like Java, we can re-assign values but cannot change type
+
+```scala
+scala> var a = 23
+a: Int = 23
+
+scala> a = "chennai"
+<console>:12: error: type mismatch;
+ found   : String("chennai")
+ required: Int
+       a = "chennai"
+           ^
+
+
+```
+]
+---
+.left-column[
+  ## Intro
+  ## Get Started    
+]
+.right-column[
+
+Type Inference
+
+```scala
+scala> "hi"
+res11: String = hi
+
+scala> 1
+res12: Int = 1
+
+scala> 1.0
+res13: Double = 1.0
+
+scala> 1L
+res14: Long = 1
+
+scala> res13 * res12
+res15: Double = 1.0
+
+``` 
+  - If you observe, the compiler infers the type automatically and prints them  
+]
+
+
+---
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+  - Though you can also manually specify type
+
+```scala
+scala> val a = 23
+a: Int = 23
+
+scala> val b: Int = 23
+b: Int = 23
+```
+  - Scala is statically typed. But yet it feels dynamically typed
+  - Best of both worlds
+
+]
+---
+
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+Other useful commands
+
+```
+scala> :help
+All commands can be abbreviated, e.g., :he instead of :help.
+:quit                    exit the interpreter
+:paste [-raw] [path]     enter paste mode or paste a file
+:help [command]          print this summary or command-specific help
+:history [num]           show the history (optional num is commands to show)
+:h? <string>             search the history
+:imports [name name ...] show import history, identifying sources of names
+:line <id>|<line>        place line(s) at the end of history
+:power                   enable power user mode
+:load <path>             interpret lines in a file
+:edit <id>|<line>        edit history
+:replay [options]        reset the repl and replay all previous commands
+:warnings                show the suppressed warnings from the most recent line which had any
+...
+```
+
+Other useful commands
+```
+use tab for completion.
+use :help for a list of commands.
+use :paste to enter a class and object as companions.
+use :paste -raw to specify a package (no template wrapper).
+use :javap to inspect class artifacts.
+use -Yrepl-outdir to inspect class artifacts with external tools.
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+#E in REPL
+- What is difference in between:
+
+```java
+String isEven = (number > 0) ? "true" : "false";
+```
+vs
+
+```java
+String isEven;
+if(number > 0)
+  isEven = "true";
+else isEven = "false";
+```
+- Or difference in between:
+
+```java
+List<Integer> ls = new ArrayList<Integer>();
+ls.add(1); 
+ls.add(2);
+//vs
+List<Integer> ls = Arrays.asList(1,2);
+```
+]
+---
+
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+## Expression vs Statement
+- Expressions are some code that yields a result. You can also say that an expression evaluates to a result or results in a value.
+- Statements are some code that does some action. This action is also called as a side effect. They do not return anything.
+- In scala, many constructs like `code-blocks`, `if-else`, `method bodies` are expressions
+
+```scala
+scala> val b = if (n == 0) true else false
+b: Boolean = false
+
+scala> val c = {
+     |     val i = 1
+     |     val j = math.pow(2, 10)
+     |     i - j
+     | }
+c: Double = -1023.0
+
+```
+- Above `|` is a prefix by REPL for readability purpose. It is not actual scala code
+]
+---
+
+
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+## Expression 
+- Expressions always return a value. 
+- In blocks, the last statement of the `code-block` becomes the return value
+
+```scala
+scala> val c = {
+     |     val i = 1
+     |     val j = math.pow(2, 10)
+     |     i - j
+     | }
+c: Double = -1023.0
+
+```
+- Above `i - j` is the last statement, so it becomes the value of `c`
+- The type of the last statement becomes the type of the target variable
+
+```scala
+scala> val sqr = {
+     |     val a = 1
+     |     val b:Long = 23L
+     |     val hi = "hi"
+     |     true
+     | }
+sqr: Boolean = true
+
+```
+- What if there are multiple probable statements?
+
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+
+## Multi Line Statements 
+
+- `:paste`
+
+
+```scala
+scala> :paste
+// Entering paste mode (ctrl-D to finish)
+
+var i = 23;
+while(i > 0) {
+    if(i % 7 == 0)
+      println(i)
+    i = i - 1
+}
+
+// Exiting paste mode, now interpreting.
+
+21
+14
+7
+i: Int = 0
+
+```
+- If you observe there are no semi-colons
+]
+
+---
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+# If - Else
+- Structure:
+
+```scala
+if (simpleExpression) {expression}
+else {expression}
+```
+Example:
+
+```scala
+scala> val num = 23
+num: Int = 23
+
+scala> val ans2 = if(num > 0){
+     |   val i = 1
+     |   val j = 2
+     |   i + j
+     | }else{
+     |   val i = 1
+     |   val j = 2
+     |   i - j
+     | }
+ans2: Int = 3
+
+```
+- `if-else` is itself also an expression
+]
+
+---
+.left-column[
+  ## Intro
+  ## REPL    
+]
+
+.right-column[
+# If - Else
+
+Task:
+- create a val that is `double` by name `rand`
+- the value should be a random number in between 0 and 100
+- you can use `math.random` to get random number between 0 and 1
+- create another val `greaterThanFive` boolean. The value of this variable must be `true` if `rand` is greater than or equal to `5`. Else `false`
+- create another val `isBlue` that must be "blue" string if `greaterThanFive` is true. Else "red"
+```
+- `if-else` is itself also an expression
+]
+---
+
+.left-column[
+  ## Intro
+  ## Data Types    
+]
+
+.right-column[
+
+## Some Basic Data Types
+
+```
+        Byte    8-bit signed two's complement integer 
+                          (-27 to 27 - 1, inclusive)
+        Short    16-bit signed two's complement integer 
+                          (-215 to 215 - 1, inclusive)
+        Int    32-bit signed two's complement integer 
+                          (-231 to 231 - 1, inclusive)
+        Long    64-bit signed two's complement integer 
+                          (-263 to 263 - 1, inclusive)
+        Char    16-bit unsigned Unicode character 
+                          (0 to 216 - 1, inclusive)
+        String   a sequence of Chars
+
+        Float    32-bit IEEE 754 single-precision float
+
+        Double   64-bit IEEE 754 double-precision float
+
+        Boolean  true or false
+```
+- Unless specified, it considers an integer as Int. Specify the type for anything specific:
+
+```scala
+
+scala> val a = 23
+a: Int = 23
+
+scala> val b:Short = 23
+b: Short = 23
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## Data Types    
+]
+
+.right-column[
+- For Long, like java end value with `l` or `L`
+
+```scala
+scala> val a = 23
+a: Int = 23
+
+scala> val b = 23L
+b: Long = 23
+
+```
+- The way an integer literal begins indicates the base of the number
+- If the number begins with a 0x or 0X, it is hexadecimal (base 16), and may contain 0 through 9 as well as upper or lowercase digits A through F.
+
+```scala
+scala> val hex = 0x5
+hex: Int = 5
+  
+scala> val hex2 = 0x00FF
+hex2: Int = 255
+  
+scala> val magic = 0xcafebabe
+magic: Int = -889275714
+
+scala> val prog = 0XCAFEBABEL
+prog: Long = 3405691582
+```
+- Note that the Scala shell always prints integer values in base 10, no matter what literal form you may have used to initialize it.
+]
+
+---
+.left-column[
+  ## Intro
+  ## Data Types    
+]
+
+.right-column[
+Task
+- create val `a` that is an integer value `42`
+- create val `b` that is a long value `42`
+- create val `c` that is a float value `42.0`
+- create val `d` that is a double value as multiplication of a, b, c
+- create val `e` that is a short value `42.0`
+- create val `f` that is a byte value `42.0`
+- create val `g` that is a hex of number (42) in base 10
+
+]
+
+
+---
+
+class: center, middle, inverse
+
+#Object Oriented with Scala
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+
+- Scala is an Object Oriented Language. (purely is debatable)
+- Every this is an object. There are no primitives
+- Every operation is a method call
+
+```scala
+scala> 1 + 2
+res1: Int = 3
+
+scala> 1.+(2)
+res2: Int = 3
+
+```
+- Building blocks are: `classes` and `traits`
+- Singleton objects are first class
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# class
+
+(Move to Worksheet)
+- Syntax:
+
+```scala
+scala> class Animal
+defined class Animal
+
+scala> val a = new Animal
+a: Animal = Animal@78b7f805
+
+```
+- repl by default prints the `toString` value
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+#class Constructor
+- By default entire class body is a constructor. Called as `Primary Constructor`
+
+```scala
+scala> class Animal{
+     |   println("I am Animal")
+     |   
+     |   if(math.random > 0.5)
+     |     println("Iam Male")
+     |   else println("I am Female")
+     | }
+defined class Animal
+
+scala> val a = new Animal
+I am Animal
+I am Female
+a: Animal = Animal@38bc5ac0
+
+```
+]
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+#class Constructor
+- You can also provide constructor arguments. But `Primary Customer` always exists
+
+```scala
+
+scala> class Animal(name: String, legs: Int) {
+     |   println("My name is: "+name+". My leg count: "+legs)
+     |   
+     |   val hasMoreLegs = legs > 4
+     | }
+defined class Animal
+
+scala> val a = new Animal("cow",4)
+My name is: cow. My leg count: 4
+a: Animal = Animal@406ad6d5
+
+scala> a.hasMoreLegs
+res3: Boolean = false
+
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Task
+
+- Create a class called `Fraction`
+- It must take two arguments: `numerator` and `denominator`. Both of type `Int`
+- In the constructor body: First print the numerator with text
+- Then print denominator with text
+- Then print the fraction part of it. First as string and later as Decimal
+
+Sample output on initializing variable:
+
+```
+numerator is 12
+denominator is 3
+Fraction: 12/3. Decimal: 4.0
+```
+
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Multiple Constructor
+- You can provide Multiple Constructors
+
+```scala
+scala> class Animal(name: String, legs: Int) {
+     |   def this(name:String) = this(name, 4)
+     |   def this() = this("Animal", 4)
+     |   
+     |   println("name: "+name+". legs: "+legs)
+     | }
+defined class Animal
+
+scala> 
+
+scala> val a = new Animal()
+name: Animal. legs: 4
+a: Animal = Animal@2f07930a
+
+scala> val a2 = new Animal("dog")
+name: dog. legs: 4
+a2: Animal = Animal@6115846e
+
+scala> val a3 = new Animal("dog",4)
+name: dog. legs: 4
+a3: Animal = Animal@aa0dbca
+
+```
+
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Fields
+
+- Fields keep state
+- Immutable Fields
+
+```scala
+scala> class Country{
+     |   val planet = "earth"
+     | }
+defined class Country
+
+scala> (new Country).planet
+res4: String = earth
+```
+- Mutable Fields
+
+```scala
+scala> class Ocean{
+     |   var waterColor = "blue"
+     | }
+defined class Ocean
+
+scala> val ocean = new Ocean
+ocean: Ocean = Ocean@3a54638b
+
+scala> ocean.waterColor = "black"
+ocean.waterColor: String = black
+
+```
+]
+
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Class Parameters
+
+- Class parameters are not fields. They are constructor arguments
+- So they can be used only in the class body. But not from outside
+```scala
+scala> class City(name:String)
+defined class City
+
+scala> val city = new City("Madras")
+city: City = City@70c31b17
+
+scala> city.name
+<console>:13: error: value name is not a member of City
+       city.name
+```
+- To make class-parameters as fields, add `val` or `var` in front of them
+```scala
+scala> class City(val name:String, var state:String)
+defined class City
+
+scala> val city = new City("Hyderabad", "Andhra Pradesh")
+city: City = City@66863941
+
+scala> city.name
+res6: String = Hyderabad
+
+scala> city.state = "Telangana"
+city.state: String = Telangana
+```
+]
+---
+
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+#require
+- require() is a pre-condition to be met
+
+```scala
+scala> class Dog(legs: Int){
+     |   require(legs > 1,"Legs cant be an invalid number")
+     | }
+defined class Dog
+
+scala> new Dog(0)
+java.lang.IllegalArgumentException: requirement failed: Legs cant be an invalid number
+  at scala.Predef$.require(Predef.scala:277)
+  ... 28 elided
+```
+- `require` is different from `assert`. assert implies that program has reached an inconsistent state and there may be a problem if the program proceeds furhter
+- `require` means that the caller of the method is at fault and should fix it
+
+]
+
+---
+
+class: middle, inverse
+#Exercise - 1
+
+- Create a class by name `Time` in `src/main/scala/util/Time.scala` file
+- It must take 3 fields as constructors: Hours, Minutes, Seconds. It must fail if invalid values
+- The fields must be accessible from outside. 
+- The values of above 3 arguments, must be valid
+- Class must be immutable
+- Add a field by name `minutesOfDay` that returns the number of minutes passed during the day
+- Access the class from sbt console
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+#Methods
+
+- Signature is of the sorts
+
+```scala
+  def methodName(arg: ArgType, arg2:ArgType2): ReturnType = 
+                    {expression}
+```
+- Example:
+
+```scala
+scala> def double(n:Int): Int = n * 2
+double: (n: Int)Int
+
+scala> double(1)
+res15: Int = 2
+
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+#Methods
+
+- Because the body of the method is an expression itself, there is no need to provide the return type
+- Compiler can infer the type automatically
+- Hence Return type is optional
+
+
+```scala
+scala> def double(n:Int):Int = n * 2
+double: (n: Int)Int
+
+scala> def double(n:Int) = n * 2
+double: (n: Int)Int
+
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# class Methods 
+
+```scala
+scala> class Number(val i:Int){
+     |   def add(num: Number) = new Number(i + num.i)
+     |   def minus(num: Number) = new Number(i - num.i)  
+     | }
+
+scala> (new Number(23)).add(new Number(-1)).i
+res18: Int = 22
+
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+Task
+- In the existing `Fraction` class, override `toString` method
+- Create a new method `getFraction`. It does not take any parameter and returns double value.
+- Create the below methods
+- `+` takes input argument as `Fraction` and returns another Fraction object after adding this and that
+- `-` takes input argument as `Fraction` and returns another Fraction object after subtracting this and that
+- `/` takes input argument as `Fraction` and returns another Fraction object after dividing this and that
+- `*` takes input argument as `Fraction` and returns another Fraction object after multiplying this and that
+
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Default Arguments
+
+```scala
+scala> class Time(val hours: Int, val minutes:Int = 0, val seconds: Int = 0)
+defined class Time
+
+scala> val time = new Time(23)
+time: Time = Time@15fe020d
+
+```
+- You can provide default arguments
+- You can try playing around on the pattern on initialization
+
+```scala
+class Time(val hours: Int=0, val minutes:Int = 0, val seconds:Int)
+
+```
+]
+
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Named Arguments
+
+```scala
+scala> class Time(val hours: Int, val minutes:Int = 0, val seconds: Int = 0)
+defined class Time
+
+scala> val time = new Time(hours = 23, minutes = 12)
+time: Time = Time@15fe020d
+
+```
+- Named arguments help with readability. Especially if there are too many arguments
+- It is not necessary to provide named arguments compulsorily for all variables. You can mix
+- Leading arguments can be ignored by giving trailing arguments by name
+
+```scala
+class Time(val hours: Int=0, val minutes:Int = 0, val seconds:Int)
+
+```
+]
+
+---
+
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Infix operators
+
+- Initially we mentioned that 
+
+```scala
+scala> 1 + 2
+res22: Int = 3
+
+scala> 1.+(2)
+res23: Int = 3
+```
+- First is a representation of the second. The operator is infix
+
+```scala
+scala> "#MAGA".charAt(0)
+res30: Char = #
+
+scala> "#MAGA" charAt 0
+res31: Char = #
+
+```
+- You can omit `dot` and `brackets`
+- Methods with only one parameter can be used at infix position
+]
+
+
+---
+
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Postfix operators
+
+```scala
+
+scala> "#MAGA" length
+res33: Int = 5
+
+
+``` 
+- Methods with no parameter can be used at postfix position
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Prefix operators
+
+```scala
+scala> ! true
+res34: Boolean = false
+
+``` 
+- `! true` gets converted to `true.unary_!`. This is a syntactic sugar
+- Other supported operators: +, - , ~, !
+]
+
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Equality
+```scala
+scala> 1 == 2
+res35: Boolean = false
+
+```
+- `==` is syntactic sugar for `equals()` in Java.
+
+```scala
+scala> "abcd" == "abcd"
+res37: Boolean = true
+
+scala> "abcd".equals("abcd")
+res38: Boolean = true
+
+```
+- `!=` is nothing but `!equals()`
+- If you override `equals` class, `==` will automatically work for it
+- Sadly there is no type safety
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Equality
+- To check equality of references (pointer to same object. Or java equivalent of `==`), use `eq`
+
+```scala
+scala> val a = "abcd"
+a: String = abcd
+
+scala> val b = new String("abcd")
+b: String = abcd
+
+scala> a eq b
+res0: Boolean = false
+
+```
+- `neq` is negation of `eq`
+- Works with `null`
+]
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Imports
+
+```scala
+import java.io.File
+```
+- To import everything under a package, use `_`
+
+```scala
+import java.io._
+```
+- To import multiple classes from a package:
+
+```scala
+import java.io.{File, IOException, FileNotFoundException}
+```
+
+- You can even give a alias name
+
+```scala
+scala> import java.util.{Random => Hey}
+import java.util.{Random=>Hey}
+
+scala> new Hey
+res1: java.util.Random = java.util.Random@7f08caf
+
+```
+]
+
+---
+
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Scoped Imports
+
+- You can limit scope of input within any block
+
+```scala
+def getRandomBoolean:Boolean = {
+  import java.util.Random
+  val r = new Random
+  r.nextBoolean()
+}
+
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO      
+]
+
+.right-column[
+# Access Modifiers
+
+- Scala fields and methods are public by default
+- Scala lets you control method visibility in a more granular and powerful way 
+- Scopes possible:
+  - public
+  - private
+  - object-private scope
+  - package
+  - package-specific 
+
+]
+---
+
+
+.left-column[
+  ## Intro
+  ## OO      
+]
+
+.right-column[
+
+# Access Modifiers
+
+```scala
+class Hi{
+  private val message = "Hi"
+  def same(other:Hi) = message == other.message
+}
+```
+
+- `message` is private to this class. 
+
+```scala
+class Hi2{
+  protected val message = "Hi"
+}
+```
+
+- The protected field `message` can be accessed either from `Hi2` or its `subclass`
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO      
+]
+
+.right-column[
+
+# Access Modifiers
+
+- You can limit scope of access
+
+```scala
+package somepackage
+class Hi {
+  private[somepackage] val message = "Hi"
+}
+
+```
+- Also for `this` object
+```scala
+class Hi2{
+  private[this] val message = "Hi"
+
+  def same(other:Hi) = message == other.message // compile failure
+}
+```
+- 
+]
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Singleton Objects
+- Scala provides provides a first class syntactic sugar for singleton classes
+- For singleton's, by definition there can only be one instance possible (classloader?)
+
+```scala
+
+scala> object Hi{
+     |   def sayHello(name:String) = "hello "+name
+     | }
+defined object Hi
+
+scala> Hi.sayHello("India")
+res2: String = hello India
+
+```
+- In java terms it can be thought upon as a class with only static methods
+- `static` is not a keyword in scala. Instead, all members that would be static, including classes, should go in a singleton object instead.
+- `object` can then be used as a factory
+
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Singleton Objects
+- `main` method is implemented as part of singleton object
+
+```scala
+object MainClass {
+  def main(args: Array[String]): Unit =
+    println("Hello World!")
+}
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# javap in REPL
+
+- javap can be used from repl
+
+```scala
+scala> class Hi{
+     | var a = 23
+     | }
+defined class Hi
+warning: previously defined object Hi is not a companion to class Hi.
+Companions must be defined together; you may wish to use :paste mode for this.
+
+scala> :javap -p Hi
+Compiled from "<console>"
+public class $line16.$read$$iw$$iw$Hi {
+  private int a;
+  public int a();
+  public void a_$eq(int);
+  public $line16.$read$$iw$$iw$Hi();
+}
+
+```
+- Helps in understanding implementation of `val` and `var`
+- Scala believes in Grand Unified Theory. Accessing fields and methods of class should no make no difference in terms of usage
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Companion Objects
+- A companion object is an object with the same name as a class or trait and is defined in the same source file as the associated file or trait
+- A companion object differs from other objects as it has access rights to the class/trait that other objects do not
+- In particular it can access methods and fields that are private in the class/trait. 
+
+```scala
+object Hello {
+  private val sayHello = "Hello!"
+}
+
+class Hello(message: String = Hello.sayHello) {
+  println(message)
+}
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Companion Objects
+
+- Sample usage:
+
+```scala
+class Animal(val name:String,val legs:Int)
+
+object Animal{
+  def copy(other:Animal) = new Animal(other.name, other.legs)
+}
+
+
+```
+- Use `:paste` in repl to suggest it that it is a companion object 
+
+]
+
+---
+
+class: middle, inverse
+#Exercise - 2
+
+- In existing file `src/main/scala/util/Time.scala`, add companion object to class `Time`
+- Create `apply` method that takes 3 arguments (hours, minutes, seconds)
+- Add another `apply` function. It must take an argument `totalSeconds` which represents total number of seconds during the day
+- It must returns instance of class `Time`
+- Add another function `fromMinutes` which must take an argument `totalMinutes` which represents total number of minutes during the day
+- It must returns instance of class `Time`
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# apply methods
+
+```scala
+scala> class Animal {}
+defined class Animal
+
+scala> object Animal {
+     |   def apply() = new Foo
+     | }
+defined module Animal
+
+scala> val newFoo = Animal()
+
+scala> object AnimalMaker {
+     |   def apply() = new Foo
+     | }
+defined module FooMaker
+
+scala> val newFoo = AnimalMaker()
+
+```
+- `Animal()` is an alias to `Animal.apply()`
+- Works with arguments as well
+
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# apply methods
+- apply method are not restricted to companion objects but instances as well
+
+```scala
+scala> class Animal(val name:String,val legs:Int){
+     |   def apply() = new Animal(name+" applied", legs * 2)
+     | }
+defined class Animal
+
+scala> val a = new Animal("cow", 4)
+a: Animal = Animal@563a89b5
+
+scala> a()
+res0: Animal = Animal@1046498a
+
+scala> a().legs
+res1: Int = 8
+
+```
+- `a()` is an alias to `a.apply()`
+- Works with arguments as well
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Equality
+Task
+- Create a class `Person` that has two constructor arguments `firstName` and `lastName` 
+- Create two person objects with same `firstName` and `lastName`
+- do `==` in between the objects
+- Implement `equals` in `Person`
+- do `==` in between the objects
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Case Classes
+
+```scala
+case class Person(name:String, num:Int)
+```
+- creates a companion object by itself
+
+```scala
+scala> case class Person(name:String, num:Int)
+defined class Person
+
+scala> val p = Person("sachin", 23)
+p: Person = Person(sachin,23)
+```
+- Apart from companion object, gives us: public getters
+
+```scala
+scala> p.name
+res2: String = sachin
+
+scala> p.num
+res3: Int = 23
+
+```
+
+]
+
+---
+
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Case Classes
+
+- Gives us: getters, hashcode, toString, equals, copy implemented
+
+```scala
+case class Person(var name:String, var num:Int)
+```
+is equivalent to 
+
+```java
+public class Person {
+        public Person(String, int); //constructor
+        public String getName();
+        public String setName(String name);
+        public String getNum();
+        public String setNum(int num);
+        public int hashCode();
+        public String toString();
+        public boolean equals(Object);
+        public Person copy(java.lang.String, int);
+        //Person("Steven",1).copy(name = "Gerrard")
+        //...
+    }
+```
+- `val` is implicit
+- `-Xprint:typer`
+
+]
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Case Classes
+- create a case class `Car` that takes two mutable arguments: `brand` and `color`
+- create an instance `car` without using the keyword `new`. Arguments: `bmw` and `blue`
+- try accessing the brand field by doing `car.brand`
+- Create two `Car` instances with same `brand` and `color`
+- Do `==` across them
+- change the color from `blue` to `red` of the same object
+- Create a new object using `copy` by changing color to `black`
+]
+---
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# Case Classes
+
+- `case class` is great. Then why not have it by default/
+- Heavy weight. May not be needed all the time
+- Cannot inherit a case class from another case class
+- Service objects should not be case classes
+- Prefer case classes with objects with mutable state, private state or no state
+]
+
+---
+class: center, middle, inverse
+
+#Class Hierarchy
+
+---
+
+class: center, middle
+![Class Hierarchy](hierarchy.png "JVM Languages")
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+]
+
+.right-column[
+# class Hierarchy
+- Unlike Java, everything including numerical values and functions are objects
+- Since Scala is class-based, all values are instances of a class
+- `scala.Any` is super class of all classes
+- `scala.AnyVal` and `Scala.AnyRef` are its two subclasses
+- `Scala.AnyVal` represents: values classes
+- `scala.AnyRef` represents reference classes
+- If Scala is used in the context of a Java runtime environment, then scala.AnyRef corresponds to java.lang.Object
+- Nothing is subtype of every other type
+
+]
+
+---
+
+class: center, middle, inverse
+
+# Collections
+
+---
+
+class: center, middle
+![Collections](collections.png "Collections Hierarchy")
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Sequences
+
+- Sequences is a mapping from an index position to an element
+- The short-word used for `Sequences` is `Seq`
+-  A sequence is a kind of iterable that has a length and whose elements have fixed index positions, starting from 0.
+
+```scala
+scala> Seq(1,2)
+res4: Seq[Int] = List(1, 2)
+
+scala> Seq()
+res5: Seq[Nothing] = List()
+
+scala> Seq("hi", "hello" , "greetings")
+res6: Seq[String] = List(hi, hello, greetings)
+
+```
+- Trait Seq has two subtraits LinearSeq, and IndexedSeq. These do not add any new operations, but each offers different performance characteristics
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Linear Sequences
+
+- A linear sequence has efficient head and tail operation
+- Frequently used linear sequences are `scala.collection.immutable.List` and `scala.collection.immutable.Stream`
+
+# Indexed Sequences
+
+- An indexed sequence has efficient apply, length, and (if mutable) update operations
+- Frequently used indexed sequences are `scala.Array` and `scala.collection.mutable.ArrayBuffer`
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Vector
+- The Vector class provides an interesting compromise between indexed and linear access. It has both effectively constant time indexing overhead and constant time linear access overhead
+
+```scala
+scala> Vector(1,2,3)
+res18: scala.collection.immutable.Vector[Int] = Vector(1, 2, 3)
+
+scala> val a= Vector(1,2,3)
+a: scala.collection.immutable.Vector[Int] = Vector(1, 2, 3)
+
+scala> a(0)
+res19: Int = 1
+
+```
+- Performance Statistics - [http://docs.scala-lang.org/overviews/collections/performance-characteristics.html](http://docs.scala-lang.org/overviews/collections/performance-characteristics.html)
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Syntactic Sugar
+
+- Each collection has a companion object with `apply` method
+
+```scala
+scala> List(1,2,3)
+res7: List[Int] = List(1, 2, 3)
+
+scala> List.apply(1,2,3)
+res8: List[Int] = List(1, 2, 3)
+
+```
+- observe `[Int]` in `List[Int]`.
+
+```scala
+
+scala> class Animal
+defined class Animal
+
+scala> class Dog extends Animal
+defined class Dog
+
+scala> class Cat extends Animal
+defined class Cat
+
+scala> List(new Cat, new Dog)
+res9: List[Animal] = List(Cat@5c141c7b, Dog@14f254f)
+
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Type Paramers
+- In Scala, type parameters are declared in `[]` instead of `<>` in Java
+- When we do:
+
+```scala
+scala> List(1,2,3)
+res10: List[Int] = List(1, 2, 3)
+
+```
+It does not mean that we are not providing type parameters. The compiler is infering by itself
+- Type arguments can be inferred or given explicitly
+- In Scala, there are not raw types. This makes it difficult to be compatible with pre-java5 code
+
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Some useful collection methods: 
+
+```scala
+scala> val ls = List(1,2,3)
+ls: List[Int] = List(1, 2, 3)
+
+scala> ls.head
+res11: Int = 1
+
+scala> ls.take(2)
+res12: List[Int] = List(1, 2)
+
+scala> ls.tail
+res13: List[Int] = List(2, 3)
+
+scala> ls.last
+res14: Int = 3
+
+scala> ls.contains(7)
+res15: Boolean = false
+
+scala> ls.zip(List(4,5,6))
+res16: List[(Int, Int)] = List((1,4), (2,5), (3,6))
+
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Right binding operators
+
+- Scala has some special behavior for added syntactic sugar support
+- Operator ending with `:` binds to the right
+- instance and argument are swapped
+
+```scala
+scala> val numbers = List(1,2,3)
+numbers: List[Int] = List(1, 2, 3)
+
+scala> 0 :: numbers
+res56: List[Int] = List(0, 1, 2, 3)
+
+scala> numbers.::(0)
+res57: List[Int] = List(0, 1, 2, 3)
+
+```
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# List
+- create a list containing numbers from 1 to 10
+- Get the first element of the list
+- Get the last element of the list
+- Get the size of the list
+- Get first 6 elements of the List
+- Get first 9 elements of the List
+- Get last 3 elements of the List
+- Get last 9 elements of the List
+- See if the list contains element: `7`
+- Get the element at index `4`
+- Add an element to the head of the List
+- Create another list of numbers from 10 to 15. Append the above list to this list in the front
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+
+```scala
+val empty: List[Nothing] = List()
+
+// Two dimensional list
+val dim: List[List[Int]] =
+   List(
+      List(1, 0, 0),
+      List(0, 1, 0),
+      List(0, 0, 1)
+   )
+```
+val nums = 1 :: 2 :: 3 :: 4 :: Nil
+val empty = Nil
+nums.reverse
+
+val fruit = List.fill(3)("apples")
+List.range(1,10)
+
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Set
+- Set contains no duplicates
+
+```scala
+scala> val set = Set(1,2,3,4,2,3,1)
+set: scala.collection.immutable.Set[Int] = Set(1, 2, 3, 4)
+
+scala> set.size
+res20: Int = 4
+
+scala> set(2)
+res21: Boolean = true
+
+scala> set contains 2
+res22: Boolean = true
+
+scala> set + 4
+res23: scala.collection.immutable.Set[Int] = Set(1, 2, 3, 4)
+
+scala> set + 6
+res24: scala.collection.immutable.Set[Int] = Set(1, 6, 2, 3, 4)
+```
+]
+
+---
+.right-column[
+# Collection Implementations:
+
+- `scala.collection.immutable` package
+- `scala.collection.mutable` package
+- default `immutable` is used
+
+```scala
+scala> val a = List(1,2,3)
+a: List[Int] = List(1, 2, 3)
+
+scala> :kind a
+scala.collection.immutable.List's kind is A
+
+```
+- Predef.scala
+
+```scala
+type List[+A] = scala.collection.immutable.List[A]
+val List = scala.collection.immutable.List
+
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Immutable Collections
+- Also called persistent data structures
+
+Task:
+- Create a set containing numbers 1 to 5
+- Add an element to the set
+- check the contents of the new set
+- check the contents of the original set
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Tuple
+- Pair is first class in scala
+
+```scala
+scala> (1,2)
+res27: (Int, Int) = (1,2)
+
+scala> ("hi","hello","greetings")
+res28: (String, String, String) = (hi,hello,greetings)
+
+```
+- `List` is homogeneous. That is it contains all elements of same type
+- `Tuple` is heterogeneous. It preserves specific type:
+
+```scala
+scala> (1, "hi", 3L)
+res29: (Int, String, Long) = (1,hi,3)
+```
+]
+
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Tuple
+
+```scala
+scala> val a = (1,2)
+a: (Int, Int) = (1,2)
+
+scala> a._1
+res30: Int = 1
+
+scala> a._2
+res31: Int = 2
+```
+- Alternate syntax
+
+```scala
+scala> ( 1 -> 2)
+res32: (Int, Int) = (1,2)
+
+```
+- Only works for arity 2
+- Due to lack of runtime support, it is represented as instance of class `TupleN` at runtime
+- Tuple2 to Tuple22
+]
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Tuple Task
+- Create a tuple of arity 2. Values: 1,1
+- Try accessing the first element
+- Try accessing the second element
+- Try accessing the third element
+- Create another tuple of arity 3. Values: 1, 1, 1
+- Try doing all the above by using `->` syntax in creating tuples
+
+]
+
+---
+
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Map
+
+- Map is a collection of multiple key value pairs.
+- Keys have to be unique.
+
+```scala
+scala> val map = Map(1 -> "a", 2 -> "b")
+map: Map[Int,String] = Map(1 -> a, 2 -> b)
+
+scala> map(1)
+res0: String = a
+
+scala> map.get(9)
+res1: Option[String] = None
+
+scala> map.getOrElse(1, "z")
+res2: String = a
+
+scala> map.getOrElse(9, "z")
+res3: String = z
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Map Task
+
+- Create a map of the integer corresponding to its string. i.e. Map of key: 1. value: "1"
+- Try getting the value by key `1`
+- Try getting the value for key `2`
+- Try converting map to List
+- Again add pair: (1, "2") to the map
+- Try getting the value by key `1`
+- Again add pair: (1, "1") to the map
+- Try converting map to Set
+
+
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Array
+- Java arrays in the background
+
+```scala
+scala> val a = Array(1,2,3)
+a: Array[Int] = Array(1, 2, 3)
+
+scala> a.size
+res46: Int = 3
+
+scala> a.length
+res47: Int = 3
+
+scala> a(0)
+res48: Int = 1
+
+scala> a(12)
+java.lang.ArrayIndexOutOfBoundsException: 12
+  ... 27 elided
+
+```
+- Arrays are mutable
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+#Array
+
+Task
+- Create an array of 5 strings. "1" "2" ... "5"
+- type must be `Array[String]`
+- access the first element
+- access the last element
+- get the size of the array
+- Try creating array of : 1, 2, "1", "2"
+- change the value at index 2 to "1 - new"
+```
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# Some useful collection methods: 
+
+- isEmpty
+- map
+- filter
+- groupBy
+- toSet
+- drop
+- dropWhile
+- reverse
+- combinations
+- ++
+
+]
+
+---
+.left-column[
+  ## Intro
+  ## OO    
+  ## Collections
+]
+
+.right-column[
+# lazy val
+
+- `val` is executed when it is defined
+- `lazy val` is executed when it is accessed for the first time
+
+```scala
+scala> val x = { println("x"); 1 }
+x
+x: Int = 15
+
+scala> lazy val y = { println("y"); 2 }
+y: Int = <lazy>
+
+scala> x
+res1: Int = 1
+
+scala> y
+  y
+res2: Int = 2
+
+scala> y
+res3: Int = 2
+```
+]
+---
+layout: false
+
+#Specification
+
+.left-column[
+        Scala Spec
+]
+
+.right-column[
+1. Scala can some times be daunting to predict the expected behavior
+2. Bug or Feature?
+3. [http://www.scala-lang.org/files/archive/spec/2.12/](http://www.scala-lang.org/files/archive/spec/2.12/)
+]
+
+---
+
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
