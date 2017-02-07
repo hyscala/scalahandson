@@ -9,15 +9,6 @@ Here you will find all the necessary things to get started with Scala Hands-on L
 
 * https://www.jetbrains.com/idea[IntelliJ IDEA]
 ** Community/Ultimate version
-* Eclipse
-** http://scala-ide.org[Scala IDE]
-* NetBeans
-** Install Scala Plugin
-* Any text Editor
-** http://ensime.org[Ensime]
-* http://www.lightbend.com/community/core-tools/activator-and-sbt[Activator]  
-
-NOTE: Use the IDE you are familiar with.  
 
 === IntelliJ & Scala IDE Worksheet
 
@@ -27,6 +18,7 @@ If you are not much into working with projects in SBT, Scala IDE (Eclipse) and I
 * https://github.com/scala-ide/scala-worksheet/wiki/Getting-Started[Scala IDE Worksheet]
 
 == Build tool  
+If you want to run in terminal :
 
 We recommend http://www.scala-sbt.org[SBT]
 
