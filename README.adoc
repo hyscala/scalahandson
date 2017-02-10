@@ -6,11 +6,11 @@ Here you will find all the necessary things to get started with Scala Hands-on L
 
 == Prerequisites  
 
-===Scala
+=== Scala
 
 * We would be using scala version `2.11.8`. You can download the binaries from https://www.scala-lang.org/download/2.11.8.html[https://www.scala-lang.org/download/2.11.8.html]
 * Scala 2.11.8 needs JDK6 to be minimum. Please make sure you have JDK6 or greater installed.
-* Please set the environemnt variables set to the bin folder. On my linux system, my `~/.bashrc` file has the following lines in the end:
+* Please set the environement variables set to the bin folder. On my linux system, my `~/.bashrc` file has the following lines in the end:
 
 ```
 export SCALA=/home/puri/awesome/scala/scala-2.11.8/bin
@@ -19,7 +19,7 @@ export PATH=$PATH:$SCALA
 ```
 
 
-===SBT
+=== SBT
 
 * Download the latest version of SBT from http://www.scala-sbt.org/download.html[http://www.scala-sbt.org/download.html]
 * Please set the environemnt variables set to the bin folder. 
@@ -37,14 +37,5 @@ For Ultiamte edition, nothing explicit to be done.
 
 == Setup
 
-* Feel free to `fork` this project if you like
-* `clone` this project locally in your system
-* if you know sbt and its installed in your system
-** open a Terminal and cd to this cloned folder
-** execute following command to run and test the project
-
-    sbt run test
-
-This will pull all necessary libraries and run both application and test.
-
-
+* Please clone this project locally on your local system
+* We will setup the project in your ide during the workshop
