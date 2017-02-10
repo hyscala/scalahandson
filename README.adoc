@@ -7,6 +7,7 @@ Here you will find all the necessary things to get started with Scala Hands-on L
 == Prerequisites  
 
 ===Scala
+
 * We would be using scala version `2.11.8`. You can download the binaries from https://www.scala-lang.org/download/2.11.8.html[https://www.scala-lang.org/download/2.11.8.html]
 * Scala 2.11.8 needs JDK6 to be minimum. Please make sure you have JDK6 or greater installed.
 * Please set the environemnt variables set to the bin folder. On my linux system, my `~/.bashrc` file has the following lines in the end:
@@ -17,6 +18,7 @@ export PATH=$PATH:$SCALA
 
 ```
 
+
 ===SBT
 
 * Download the latest version of SBT from http://www.scala-sbt.org/download.html[http://www.scala-sbt.org/download.html]
@@ -24,13 +26,14 @@ export PATH=$PATH:$SCALA
 
 === IDE  
 
-We do not intend to start IDE wars. You are free to use any IDE/Editor of your choice. But because it is a beginner workshop, we would be doing everything using Intellij Idea. Intellij is a fantastic IDE:
+We do not intend to start IDE wars. You are free to use any IDE/Editor of your choice. But because it is a beginner workshop, we using Intellij Idea. Intellij is a fantastic IDE:
 
 * https://www.jetbrains.com/idea[IntelliJ IDEA]
 ** Community/Ultimate version
 
 
 In case you are using the community edition of intellij, Scala plugin would have to be explicitly enabled. You can follow the instructions at: https://www.jetbrains.com/help/idea/2016.3/enabling-and-disabling-plugins.html
+For Ultiamte edition, nothing explicit to be done.
 
 == Setup
 
@@ -42,11 +45,6 @@ In case you are using the community edition of intellij, Scala plugin would have
 
     sbt run test
 
-This will pull all necessary compiler,  library and run both application and test at same time.
-
-If you plan to use an IDE try to do same in there also.
-
-
-
+This will pull all necessary libraries and run both application and test.
 
 
