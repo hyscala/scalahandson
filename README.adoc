@@ -5,22 +5,32 @@ Welcome to Scala Hands-on lab repository.
 Here you will find all the necessary things to get started with Scala Hands-on Lab program.  
 
 == Prerequisites  
+
+===Scala
+* We would be using scala version `2.11.8`. You can download the binaries from https://www.scala-lang.org/download/2.11.8.html[https://www.scala-lang.org/download/2.11.8.html]
+* Scala 2.11.8 needs JDK6 to be minimum. Please make sure you have JDK6 or greater installed.
+* Please set the environemnt variables set to the bin folder. On my linux system, my `~/.bashrc` file has the following lines in the end:
+
+```
+export SCALA=/home/puri/awesome/scala/scala-2.11.8/bin
+export PATH=$PATH:$SCALA
+
+```
+
+===SBT
+
+* Download the latest version of SBT from http://www.scala-sbt.org/download.html[http://www.scala-sbt.org/download.html]
+* Please set the environemnt variables set to the bin folder. 
+
 === IDE  
+
+We do not intend to start IDE wars. You are free to use any IDE/Editor of your choice. But because it is a beginner workshop, we would be doing everything using Intellij Idea. Intellij is a fantastic IDE:
 
 * https://www.jetbrains.com/idea[IntelliJ IDEA]
 ** Community/Ultimate version
 
-=== IntelliJ & Scala IDE Worksheet
 
-If you are not much into working with projects in SBT, Scala IDE (Eclipse) and IntelliJ provides a Worksheet support, find more about Worksheet here
-
-* https://confluence.jetbrains.com/display/IntelliJIDEA/Working+with+Scala+Worksheet[IntelliJ Scala Worksheet]
-* https://github.com/scala-ide/scala-worksheet/wiki/Getting-Started[Scala IDE Worksheet]
-
-== Build tool  
-If you want to run in terminal :
-
-We recommend http://www.scala-sbt.org[SBT]
+In case you are using the community edition of intellij, Scala plugin would have to be explicitly enabled. You can follow the instructions at: https://www.jetbrains.com/help/idea/2016.3/enabling-and-disabling-plugins.html
 
 == Setup
 
