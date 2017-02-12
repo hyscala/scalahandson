@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+          font-family: 'Yanone Kaffeesatz';
+          font-weight: 400;
+          margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+          bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+          color: rgb(249, 38, 114);
+          text-decoration: none;
+      }
+      code {
+          background: #e7e8e2;
+          border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+          float: left;
+          width: 47%;
+      }
+      .pull-right {
+          float: right;
+          width: 47%;
+      }
+      .pull-right ~ p {
+          clear: both;
+      }
+      #slideshow .slide .content code {
+          font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+          font-size: 0.9em;
+          padding: 15px;
+      }
+      .inverse {
+          background: #103a51;
+          color: #777872;
+          text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+          color: #f3f3f3;
+          line-height: 0.8em;
+      }
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+          bottom: 12px;
+          left: 20px;
+      }
+      #slide-how .slides {
+          font-size: 0.9em;
+          position: absolute;
+          top:  151px;
+          right: 140px;
+      }
+      #slide-how .slides h3 {
+          margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+          padding: 1px 20px;
+          height: 90px;
+          width: 120px;
+          -moz-box-shadow: 0 0 10px #777;
+          -webkit-box-shadow: 0 0 10px #777;
+          box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+          background: #fff;
+          position: absolute;
+          top: 20%;
+          left: 20%;
+          z-index: 1;
+      }
+      #slide-how .slides .second {
+          position: relative;
+          background: #fff;
+          z-index: 0;
+      }
+      /* Two-column layout */
+      .left-column {
+          color: #ccd6dd;
+          width: 20%;
+          font-size: 12pt;
+          /*height: 92%;*/
+          float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+      }
+      .right-column {
+          width: 75%;
+          float: right;
+          padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+
+![Scala](smooth-spiral.png "Scala")
+
+#Scala
+
+
+https://twitter.com/purijatin7
+
+---
+.left-column[
+  ## String Interpolation
+]
+
+.right-column[
+- Sometimes string concatenation can get tedious to write
+
+```scala
+scala> val num = 1
+num: Int = 1
+
+scala> val den = 2
+den: Int = 2
+
+scala> "numerator / denominator : "+(num)+"/"+den
+res32: String = numerator / denominator : 1/2
+
+scala> s"numerator / denominator: $num/$den"
+res33: String = numerator / denominator: 1/2
+
+scala> val list = List(1,2,3)
+list: List[Int] = List(1, 2, 3)
+
+scala> s" second element is ${list(1)}"
+res34: String = " second element is 2"
+
+```
+]
+---
+# Call by name
+
+- As we discussed, in scala everything is an expression.
+What will be the output of this program?
+
+```scala
+def inc(n:Int) = {
+  println("inc was called")
+  1 + n
+}
+
+inc{
+  println("hi")
+  7
+}
+```
+- The argument gets evaluated first and then `inc` is called
+- What if `inc` was never used the argument
+
+```scala
+
+def inc(n:Int) = {
+  println("inc was called") //dont use inc 
+}
+
+inc{
+  println("hi")
+  7
+}
+```
+---
+
+# Call by name
+
+- Then there is no need to evaluate the argument
+- More often, you can delay executing evaluating the argument to first time it is used. This is called `call by name` and represented as `: =>` syntax
+
+```scala
+def inc2(n: => Int) = {
+  println("inc was called")
+  1 + n
+}
+
+inc2{
+  println("hi")
+  7
+}
+```
+
+---
+# Training Schedule
+
+1. Functions
+2. Higher Order Functions
+3. for-expressions
+4. Inheritance
+5. Traits
+6. Pattern Matching
+
+---
+
+.left-column[
+  ## Functions
+]
+
+.right-column[
+# Higher order functions
+
+```scala
+scala> val inc = (n: Int) => n + 1
+addOne: Int => Int = $$Lambda$1108/665419272@77e7246b
+
+scala> inc(1)
+res1: Int = 2
+
+scala> inc.apply(1)
+res2: Int = 2
+
+```
+- `Int => Int` is represented as `Function1[Int, Int]` class
+- `(Int, Int) => Int` is represented as `Function2[Int, Int]` class
+- `(Int, Int, Int) => Int` is represented as `Function3[Int, Int]` class
+- so on till Function22
+]
+
+---
+
+
+.left-column[
+  ## Functions
+]
+
+.right-column[
+
+- Functions can take other functions as arguments. Functions can also return functions
+
+```scala
+scala> def inc(n:Int) = n +1
+inc: (n: Int)Int
+
+scala> def add(num:Int, f: Int => Int) = f(num)
+add: (num: Int, f: Int => Int)Int
+
+scala> add(1, inc)
+res0: Int = 2
+
+scala> add(1, x => x + 1)
+res0: Int = 2
+
+```
+
+- This is called as Higher Order Functions
+- `filter` is defined in List as:
+
+```scala
+def filter(p: A => Boolean)
+```
+
+```scala
+scala> val ls = List(1,2,3)
+ls: List[Int] = List(1, 2, 3)
+
+scala> ls.filter(x => x % 2== 0)
+res4: List[Int] = List(2)
+
+scala> ls.filter((x:Int) => x % 2== 0)
+res5: List[Int] = List(2)
+
+
+```
+
+]
+
+---
+.left-column[
+  ## Functions
+]
+
+.right-column[
+
+```scala
+scala> val f = (n:Int) => n % 2 == 0
+f: Int => Boolean = $$Lambda$1143/1545377921@1c18ee69
+
+scala> List(1,2,3).filter(f)
+res6: List[Int] = List(2)
+
+```
+- `map` method: Is used to transform the list to something else
+
+```scala
+scala> List(1,2,3).map(x => x *2)
+res7: List[Int] = List(2, 4, 6)
+
+scala> List(1,2,3).map(x => ""+x)
+res8: List[String] = List(1, 2, 3)
+
+scala> List("Hello world", "namastey india", 
+                "greetings australia").map(x => x.charAt(0))
+res9: List[Char] = List(H, n, g)
+
+```
+
+```scala
+scala> case class Name(name:String, age:Int)
+defined class Name
+
+scala> val names = List(Name("hi",1), Name("rajat",2))
+names: List[Name] = List(Name(hi,1), Name(rajat,2))
+
+scala> names.map(x => x.name)
+res1: List[String] = List(hi, rajat)
+
+```
+]
+---
+.left-column[
+  ## Functions
+]
+
+.right-column[
+##Higher order functions
+
+- Write a function that finds the sum of integers it has been passed.
+- `reduce`
+
+```scala
+scala> def sum(ls:List[Int]) = ls.reduce((a,b) => a + b)
+sum: (ls: List[Int])Int
+
+scala> sum(List(1,2,3))
+res2: Int = 6
+
+```
+- foldLeft
+
+```scala
+scala> def sum2(ls:List[Int]) = ls.foldLeft(0)((a,b) => a+ b)
+sum2: (ls: List[Int])Int
+
+scala> sum2(List(1,2,3))
+res3: Int = 6
+
+
+```
+
+]
+
+---
+.left-column[
+  ## Functions
+]
+
+.right-column[
+#Higher order functions
+
+Task
+- Create a list of strings: 1 to 5. i.e. List("1","2","3","4","5")
+- Generate another list from above whose contents must be `List(1,2,3,4,5)` i.e. `List[Int]`. Use `map` for this operation
+- From above list, then generate another list that is List of square of every number. i.e. is List(1,4,9,16,25)
+- Filter elements from the list that is odd
+- Find the element that is divisible by 3
+]
+
+---
+
+.left-column[
+  ## Functions
+]
+
+.right-column[
+#Higher order functions
+
+Task-2
+- create case class `Player` that takes two argument `name:String` and `country:String`
+- create case class `Team` that takes one argument `List[Player]`
+- create list of 5 players: Dhoni, anderson, broad, kohli, steyn with teams: ind, eng, eng, ind, sa
+- Write a function in companion object of `Team`:
+
+```scala
+object Team{
+  def getTeams(ls: List[Players]): List[Team] = ???
+}
+```
+- Hint: you might want to look at `groupBy` in List
+]
+
+---
+class: center, middle, inverse
+
+
+#Scala for-expressions
+
+---
+
+.left-column[
+  ## Functions
+  ## for-expressions
+]
+
+.right-column[
+#for expressions
+
+- scala offers a variety of for expressions
+
+```scala
+for(seq) block
+```
+
+- Example:
+
+```scala
+scala> for(i <- 1 to 3) println(i)
+1
+2
+3
+
+scala> for(i <- 1 to 3) {
+     |  println(i)
+     | }
+1
+2
+3
+
+```
+-  seq is a sequence of generators, definitions and filters, with semicolons between successive elements
+]
+
+---
+.left-column[
+  ## Functions
+  ## for-expressions
+]
+
+.right-column[
+#for expressions
+
+```scala
+scala> for(i <- 1 until 3) {
+     |     println("i is " + i);
+     | }
+i is 1
+i is 2
+
+scala> val myArray  = new Array[String](3);
+myArray: Array[String] = Array(null, null, null)
+
+scala> myArray(0) = "hi"; myArray(1) = "hey"; myArray(2) = "yo"
+
+scala> for(value <- myArray ) {
+     |     println(value);
+     | }
+hi
+hey
+yo
+
+```
+
+]
+---
+
+.left-column[
+  ## Functions
+  ## for-expressions
+]
+
+.right-column[
+
+Also
+
+```scala
+scala> var myArray : Array[String] = new Array[String](3);
+myArray: Array[String] = Array(null, null, null)
+
+
+scala> for(i <- 0 until myArray.length){
+     |     myArray(i) = "value is: " + i;
+     | }
+
+
+scala> for(value : String <- myArray if value.endsWith("2")) {
+     |     println(value);
+     | }
+value is: 2
+
+scala> for{
+     |   value : String <- myArray
+     |   if value.endsWith("2")
+     | } {
+     |   println(value)
+     | }
+value is: 2
+
+```
+]
+
+
+---
+.left-column[
+  ## Functions
+  ## for-expressions
+]
+
+.right-column[
+#for expressions
+
+```scala
+
+for ( seq ) yield expr
+
+```
+- Example:
+
+```scala
+scala> for( i<- 1 to 10) yield i * 2
+res14: scala.collection.immutable.IndexedSeq[Int] = Vector(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
+
+scala> for{
+     | i <- 1 to 10
+     | if i % 2 == 0
+     | } yield i *2
+res15: scala.collection.immutable.IndexedSeq[Int] = Vector(4, 8, 12, 16, 20)
+
+
+scala> for{
+     | i <- 1 to 10
+     | j <- 1 to 100
+     | if j == i * i
+     | } yield (i,j)
+res16: scala.collection.immutable.IndexedSeq[(Int, Int)] = Vector((1,1), (2,4), (3,9), (4,16), (5,25), (6,36), (7,49), (8,64), (9,81), (10,100))
+
+```
+- `if expr` must evaluate to boolean value
+]
+
+---
+.left-column[
+  ## Functions
+  ## for-expressions
+]
+
+.right-column[
+#for expressions
+
+```scala
+  for {
+    p <- persons              // a generator
+    n = p.name                // a definition
+    if (n startsWith "To")    // a filter
+  } yield n
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## for-expressions
+]
+
+.right-column[
+Task: 
+
+- Create a case class `WaterBottle` that has two arguments: `brand:String` and `litre: Int`
+- Create a list of `WaterBottle` that will contain 3 water bottle objects: WaterBottle("bisleri",1), WaterBottle("bisleri",2), WaterBottle("himalayan",1)
+- Implement using `for` print all the objects that has brand `bisleri`
+- Implement using `for` print all the objects that has 1 litre capacity
+- Implement using `for-yield` obtain a collection of all `brands` used in list above
+- Implement using `for-yield` obtain a collection of all litres capacity used in list above
+- Implement using `for-yield` obtain a collection of all objects with litre capacity as twice the original one
+]
+---
+
+class: center, middle, inverse
+
+
+#Inheritance
+
+
+---
+
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+#Inheritance
+- Scala has first class support for inheritance
+- Code reuse
+- There can only be one super class. 
+- `Any` is the super most class for every class
+- Non private members are inherited
+- Fields and methods can be overridden. 
+]
+
+---
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+
+```scala
+scala> class Animal
+defined class Animal
+
+scala> class Dog extends Animal
+defined class Dog
+```
+
+- `Animal` also implicitly extends `AnyRef`. If not mentioned, then super class is `AnyRef`
+- A class can only extend one super class
+
+```scala
+class Animal{
+  def legs = 4
+  val nose = 1
+  
+  private def hands = 1
+}
+
+class Octopus extends Animal{
+  override def legs = 8
+  override val nose = 23
+}
+
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+
+#Super class constructor
+```scala
+class Animal2(legs:Int){
+}
+
+class Octopus2 extends Animal2(8){
+}
+- Constructors of super class are called first
+
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+
+#final class
+ - Cant be overridden
+
+```scala
+ scala> final class Name
+defined class Name
+
+scala> class Hi extends Name
+<console>:12: error: illegal inheritance from final class Name
+       class Hi extends Name
+                        ^
+
+```
+
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+
+#abstract class
+
+```scala
+abstract class Name{
+  def foo:String
+}
+
+class Hi extends Name{
+  override def foo = "hi"
+}
+
+
+```
+- `override` word is optional to use
+- To access super class members use the keyword `super`
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+#sealed class
+- A sealed class can only be extended in the same source file as it's declared.
+- If you try extending the sealed, the compiler will throw warning
+- This is useful to know all the possible sub-classes and build code accordingly
+
+```scala
+sealed trait Option[+A]
+
+final case class Some[+A] extends Option[A]
+object None extends Option[Nothing]
+```
+
+]
+
+---
+
+class: center, middle, inverse
+
+
+#traits
+
+
+---
+
+
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+#traits
+
+- In scala you can only extend one class. This is also a restriction from JVM side
+- traits give you the ability to mix-in multiple traits
+
+```scala
+  abstract class Animal
+  trait Bird extends Animal {
+    def fly: String = "fly"
+  }
+  trait Swimmer {
+    def swim: String = "swim"
+  }
+  class Fish extends Animal with Swimmer
+  class Duck extends Bird with Swimmer //mix in
+
+  class SpecialDuckFish extends Animal with Bird with Swimmer
+  (new SpecialDuckFish).swim
+
+
+
+```
+- You can have multiple `with traits`
+- `extends` statement will always have to be first
+]
+
+---
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+#traits
+
+- traits can contain concrete and abstract members
+- They do not have an constructor arguments
+- They can also extend other classes. But one one max at a time
+
+```scala
+scala> class Animal
+defined class Animal
+
+scala> trait Dog extends Animal
+defined trait Dog
+
+```
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## traits
+]
+
+.right-column[
+#traits
+
+Task
+
+- Create a sealed class `Car`
+- Create a trait `Engine` that has one method `def cc:Int`
+- Create a trait `Tyres` that has one method `def types: Int`
+- Create a trait `Color` that has one method `def color: String`
+- Create a trait `BlueColor` that has extends `Color` and overrides `color` method to return `blue`
+- Create a class `Audi` that is `Car` and has `Engine` of 2000cc, 4 `Tyres` and is BlueColor
+]
+
+---
+
+class: center, middle, inverse
+
+
+#Pattern Matching
+
+
+---
+
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+- Scala has a built-in general pattern matching mechanism. 
+- It allows to match on any sort of data with a first-match policy
+- match block is an expression
+
+```scala
+  def test(x: Int): String = x match {
+    case 1 => "one"
+    case 2 => "two"
+    case _ => "many"
+  }
+  test(2)
+
+  def test(x: Any): String = x match {
+    case 1 => "one"
+    case "2" => "two"
+    case "hi" => "oops"
+    case _ => "meow"
+  }
+  test("abcd") //returns meow
+
+```
+
+If none of the case blocks match then exception is thrown
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+# Pattern Matching
+
+```scala
+case pattern => result
+
+```
+
+- This can be very powerful. 
+- The pattern is not some random thing. But amongst the list of things provided by the scala spec
+- If pattern matches then result is evaluated
+- result is an expression again
+
+]
+
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Wildcard pattern: matches everything
+
+```scala
+val ob = "10"
+ob match {
+  case "1" => 1
+  case _ => 100
+}
+```
+
+- `case _` in above case
+]
+
+---
+
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Variable Patterns
+
+```scala
+val ob = 1
+
+ob match {  
+  case x => println(s"it is $x")
+}
+```
+
+- A variable pattern x is a simple identifier which starts with a lower case letter. 
+- It matches any value, and binds the variable name to that value. 
+- The type of xx is the expected type of the pattern as given from outside
+
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Type Patterns
+- You can match on the type of an expression, for example:
+
+```scala
+def get(x:Any) = x match {
+  case y: Int => x
+  case s: String => Integer.parseInt(s)
+  case _: BigInt => Int.MaxValue
+  case _ => 0
+}
+```
+
+]
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Stable patterns
+
+- i.e. match `a match {case x => ..}  such that a == x
+
+```scala
+val y = 12
+def get(x:Any) = x match{
+  case 1 => 1
+  case "1" => 1
+  case `y` => 2
+}
+```
+- identifiers are surrounded by `back-ticks` to separate them from variable pattern
+- or the variable name can start with Capital case
+- it can either be a variable or a singleton class
+
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Tuple Pattern
+
+val c = 1
+```scala
+def get(x:Any) = x match{
+  case (1,2) => 1
+  case ("1", "2") => 1
+  case (x:Int, y:Int) => x + y
+  case (`c`, 4) => c+4
+  case (x, y) => "x -"+y  
+}
+```
+
+]
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+- Pattern Match on case class
+
+```scala
+case class Person(name:String, age:Int)
+
+def get(x:Any) = x match{
+  case Person(n, 1) => s"$n is a kid"
+  case Person(n, a) => s"$n age is $a"
+  case _ => "not a person"
+}
+```
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Pattern Match on Sequences
+
+```scala
+def get(x:Seq[Int]) = x match {
+  case x :: Nil => "size 1"
+  case x :: xs => "size greater than 1"
+  case _ => "hmm"
+}
+
+```
+- Implement the below function using pattern matching
+
+```scala
+//it must return the head element
+def head(ls:Seq[String]) = ls match {
+  case x :: Nil => x
+  case x :: xs => x
+  case Nil => "none"
+}
+```
+
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+
+#Pattern Matching
+
+You case use `if` to aid in matching
+
+```scala
+def get(x:Any) = x match {
+  case x: Int if x < 0 => -1
+  case x:Int if x == 0 => 0
+  case x:Int if x > 0 => 1
+}
+
+```
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+#Pattern Matching
+
+Bind Patterns
+
+```scala
+def get(any: Any): String = any match {
+  case person @ Person(_, 0) => s"$person just got born"
+  case person @ Person(_, m) => s"$person age is $m"
+  case _ => s"$any is unknown"
+}
+
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+]
+
+.right-column[
+Task
+
+
+
+If the first value of pair is an Int, then it must return Int Value.
+
+If the first value of pair is an String, then it must return the Int value of String
+
+If the first value is something else, then it must return 0
+
+```scala
+
+def getNum(pair: (Any, Any)) : Int = {
+  
+}
+```
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+]
+
+.right-column[
+#try- catch
+
+- Similar to Java try-catch. But just that the catch block is like pattern matching
+
+```scala
+def toInt(n:String) = try{
+  n.toInt
+}catch{
+  e: Exception =>
+}
+```
+
+- Another Example:
+
+```scala
+try{
+  n.toInt
+} 
+catch{
+  case e: NumberFormatException => e.printStackTrace
+  case f: IllegalArgumentException => throw new RuntimeException(f)
+  case x: Throwable => println("Got some other kind of exception")
+}finally{
+  //always executed  
+}
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+]
+
+.right-column[
+#Try
+
+- There is another alternative to `try-catch`: 
+
+```scala
+import scala.util.{Try, Success, Failure}
+```
+- Try is defined as `Try[T](body : => T)`
+- So we can:
+
+```scala
+scala> Try("jatin".toInt)
+res38: scala.util.Try[Int] = Failure(java.lang.NumberFormatException: For input string: "jatin")
+
+scala> Try(1.toInt)
+res39: scala.util.Try[Int] = Success(1)
+
+```
+]
+
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+]
+
+.right-column[
+#Try
+
+- Try is more useful than `try-catch` it offers quite nice utilities
+
+```scala
+scala> def toInt(n:String) = Try(n.toInt) match {
+     |     case Success(n) => n
+     |     case Failure(e) => 0 //default value
+     | }
+toInt: (n: String)Int
+
+scala> toInt("1")
+res41: Int = 1
+
+scala> toInt("hi")
+res42: Int = 0
+
+```
+
+- Only non fatal utilities are caught by catch [http://www.scala-lang.org/api/current/#scala.util.control.NonFatal$]
+
+```scala
+def f(n:Int):Int = f(n) + 1
+Try(f(1))
+
+```
+
+]
+
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+]
+
+.right-column[
+
+#Try
+
+
+```scala
+import scala.io.Source
+import scala.util.Try
+
+def readText(filename: String): Try[List[String]] = {
+  Try(Source.fromFile(filename).getLines.toList)
+}
+val t = readText("~/.bashrc")
+
+val a: List[String] = t.get
+t.foreach(x => println(x))
+t.isSuccess
+t.isFailure
+
+t.map(x => x.size).getOrElse(0)
+
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+]
+
+.right-column[
+
+Task
+
+- Create a function by signature:
+
+```scala
+
+/**
+* Takes a string. Sample input: "1,2,3,4,5,6,7".
+* You need to find the sum of all numbers in the string. 
+* - To do this, first split the string by `,`. 
+*    Look at `split` function in String class
+* - it will return an `Array[String]`. Convert it to `Array[Int]`
+* - Find the sum of the numbers
+* - Twist: But there can be an invalid value as well. 
+*
+*/
+def getSqrt(n:String): Try[Double]{
+  
+}
+
+```
+
+]
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+  ## Option
+]
+
+.right-column[
+- Option either contains a value or they dont
+- If they contain a value. it is `Some` else `None`
+
+```scala
+val a = Option(1)
+val b = None
+
+a match{
+  case Some(x) => println(x)
+  case None => println(0)
+}
+
+
+val aa = Option(1)
+val b = None
+
+aa match{
+  case Some(x) => println(x)
+  case None => println(0)
+}
+
+aa.getOrElse(0)
+Option(1).map(x => x * 2)
+Option(1).filter(x => x % 2 == 0)
+```
+
+]
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+  ## Option
+]
+
+.right-column[
+
+Task
+
+- Return `Option` now
+
+```scala
+
+/**
+* Takes a string. Sample input: "1,2,3,4,5,6,7".
+* You need to find the sum of all numbers in the string. 
+* - To do this, first split the string by `,`. 
+*    Look at `split` function in String class
+* - it will return an `Array[String]`. Convert it to `Array[Int]`
+* - Find the sum of the numbers
+* - If there is an invalid value, return None. Else Option(ans)
+*
+*/
+def getSqrt(n:String): Option[Double]{
+  
+}
+
+```
+
+]
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+  ## Option
+  ## Partial-Functions
+]
+
+.right-column[
+- Sometimes you want to define a Scala function that will only work for a subset of possible input values
+
+```scala
+  def getSqrt(n:Int): Double
+```
+- Above function takes any integer. But square root can only be defined for positive integers
+- `Partial Functions` are functions that does not provide an answer for every possible input value it can be given
+
+]
+---
+
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+  ## Option
+  ## Partial-Functions
+]
+
+.right-column[
+```scala
+scala> def sqrt: PartialFunction[Int, Double] = {
+     |   case x:Int  if x >= 0 => math.sqrt(x)
+     | }
+sqrt: PartialFunction[Int,Double]
+
+scala> sqrt.isDefinedAt(-1)
+res0: Boolean = false
+
+scala> sqrt(1)
+res1: Double = 1.0
+
+scala> sqrt(-1)
+scala.MatchError: -1 (of class java.lang.Integer)
+  at scala.PartialFunction$$anon$1.apply(PartialFunction.scala:254)
+```
+- You can check if the function is defined or not using `isDefinedAt`
+- PartialFunction extends Function. So it can be used where ever functions can be used:
+
+```scala
+scala> List(4,9,25).map(sqrt)
+res4: List[Double] = List(2.0, 3.0, 5.0)
+
+```
+]
+---
+.left-column[
+  ## Functions
+  ## Pattern Matching
+  ## Try-Catch
+  ## Option
+  ## Partial-Functions
+]
+
+.right-column[
+
+- `collect` function of `List` class specifically takes `PartialFunction` 
+```scala
+scala> List(42, "cat") collect { case i: Int => i + 1 }
+res5: List[Int] = List(43)
+```
+- Some more examples:
+
+```scala
+scala> val sample = 1 to 5
+sample: scala.collection.immutable.Range.Inclusive = Range(1, 2, 3, 4, 5)
+
+scala> val isEven: PartialFunction[Int, String] = {
+     |  case x if x % 2 == 0 => x + " is even"
+     | }
+isEven: PartialFunction[Int,String] = <function1>
+
+scala> val evenNumbers = sample collect isEven
+evenNumbers: scala.collection.immutable.IndexedSeq[String] =
+  Vector(2 is even, 4 is even)
+```
+]
+
+---
+
+#Feedback
+
+This content is open-source. For benefit of everyone, please feel free to provide feedback by sending email to author: Jatin Puri.
+
+Email: [purijatin@gmail.com](purijatin@gmail.com)
+
+Twitter: [@purijatin7](http://twitter.com/purijatin7)
+
+---
+class: center, middle
+The MIT License
+
+Copyright (c) 2016-2017 Jatin Puri (http://jatinpuri.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+---
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

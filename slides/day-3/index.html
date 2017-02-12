@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+          font-family: 'Yanone Kaffeesatz';
+          font-weight: 400;
+          margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+          bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+          color: rgb(249, 38, 114);
+          text-decoration: none;
+      }
+      code {
+          background: #e7e8e2;
+          border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+          float: left;
+          width: 47%;
+      }
+      .pull-right {
+          float: right;
+          width: 47%;
+      }
+      .pull-right ~ p {
+          clear: both;
+      }
+      #slideshow .slide .content code {
+          font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+          font-size: 0.9em;
+          padding: 15px;
+      }
+      .inverse {
+          background: #103a51;
+          color: #777872;
+          text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+          color: #f3f3f3;
+          line-height: 0.8em;
+      }
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+          bottom: 12px;
+          left: 20px;
+      }
+      #slide-how .slides {
+          font-size: 0.9em;
+          position: absolute;
+          top:  151px;
+          right: 140px;
+      }
+      #slide-how .slides h3 {
+          margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+          padding: 1px 20px;
+          height: 90px;
+          width: 120px;
+          -moz-box-shadow: 0 0 10px #777;
+          -webkit-box-shadow: 0 0 10px #777;
+          box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+          background: #fff;
+          position: absolute;
+          top: 20%;
+          left: 20%;
+          z-index: 1;
+      }
+      #slide-how .slides .second {
+          position: relative;
+          background: #fff;
+          z-index: 0;
+      }
+      /* Two-column layout */
+      .left-column {
+          color: #ccd6dd;
+          width: 20%;
+          font-size: 12pt;
+          /*height: 92%;*/
+          float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+      }
+      .right-column {
+          width: 75%;
+          float: right;
+          padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+
+![SBT](sbt.png "Scala")
+
+---
+layout: false
+.left-column[
+  ## SBT
+]
+.right-column[
+#SBT
+
+- SBT is a modern build tool. 
+- While it is written in Scala and provides many Scala conveniences, it is a general purpose build tool.
+- Sbt is the de facto build tool in the Scala community 
+]
+
+---
+
+layout: false
+.left-column[
+  ## SBT
+]
+.right-column[
+#SBT
+Its main features are:
+
+- Native support for compiling Scala code
+- Integrates with many Scala test frameworks
+- Dependency management with Ivy (hence maven repositories)
+- Continuous Compilation
+- Other build tasks to: test, deploy
+- support for mixed Java/Scala projects
+]
+
+---
+
+layout: false
+.left-column[
+  ## SBT
+]
+.right-column[
+#SBT
+
+```scala
+
+organization := "com.jatinpuri"
+
+name := "kvstore"
+
+version := "1.0.0"
+
+scalaVersion := "2.10.2"
+
+scalacOptions ++= Seq("-deprecation", "-feature")
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+
+libraryDependencies += "junit" % "junit" % "4.10" % "test"
+
+libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.10.1"
+
+```
+- `project/plugins.sbt`
+]
+---
+layout: false
+.left-column[
+  ## SBT
+]
+.right-column[
+#SBT
+Some useful sbt tasks:
+
+- console
+	- Lets you access code from console
+- compile
+- test
+- publish
+- //other plugin tasks
+]
+
+---
+
+layout: false
+.left-column[
+  ## SBT
+]
+.right-column[
+#sbteclipse
+- sbteclipse is a plugin for eclipse support for sbt
+- Add the below line in `projects/plugins.sbt`
+
+```scala
+addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "5.0.1")
+```
+- In sbt use the command eclipse to create Eclipse project files
+
+```
+> eclipse
+```
+- In Eclipse use the Import Wizard to import Existing Projects into Workspace
+]
+
+---
+class: center, middle, inverse
+
+#JSON Parsers
+
+---
+.left-column[
+  ## SBT
+  ##JSON
+]
+.right-column[
+
+#JSON Parsing
+There are tonnes of libraries in the Scala World that do parsing of JSON
+- Play-JSon
+- Spray-Json
+- lift-json
+- spray-json-shapeless
+- json4s (one facade to rull them all)
+- rapture
+- jawn
+- Scala standard library
+
+Purely functional approaches:
+- argonaut 
+- circe
+
+]
+---
+.left-column[
+  ## SBT
+  ## Play-JSON
+]
+.right-column[
+
+#Play-Json
+- We would be using play-json in our case. Add the below in `build.sbt` file
+
+```scala
+libraryDependencies += "com.typesafe.play" %% "play-json" % playVersion
+```
+- Automatic conversion to and from case classes with minimal boilerplate
+- If you want to get up and running quickly with minimal code, this is probably the place to start.
+- Custom validation while parsing.
+- Automatic parsing of JSON in request bodies, with auto-generated errors if content isn’t parseable or incorrect Content-type headers are supplied.
+]
+---
+.left-column[
+  ## SBT
+  ## Play-JSON
+]
+.right-column[
+
+#Play-Json
+
+Fundamentally there are two parts: 
+- Reading JSON
+  - Also includes demarshalling
+- Generating JSON
+  - Also includes marshalling  
+]
+---
+.left-column[
+  ## SBT
+  ## Play-JSON
+]
+.right-column[
+
+#Play-Json
+
+Parsing JSON
+
+```scala
+import play.api.libs.json._
+
+val json = Json.parse(
+  """
+    |{"menu": {
+    |  "id": "file",
+    |  "value": "File"
+    |}}
+  """.stripMargin)
+
+(json \ "menu").get
+
+(json \ "menu" \ "id").get
+```
+]
+
+---
+.left-column[
+  ## SBT
+  ## Play-JSON
+]
+.right-column[
+#Play-Json
+
+Fundamentally there is `JsValue` trait representing any `JSON` object. There are multiple **case classes** that extend `JsValue` class:
+
+- JsString
+- JsNumber
+- JsBoolean
+- JsObject
+- JsArray
+- JsNull
+
+]
+---
+.left-column[
+  ## SBT
+  ## Play-JSON
+]
+.right-column[
+#Play-Json
+To create json object from `case class`:
+
+
+- 
+]
+---
+.left-column[
+  ## SBT
+  ## Play-JSON
+]
+.right-column[
+
+#Play-Json
+
+Parsing JSON
+
+```scala
+import play.api.libs.json._
+
+val json:JsValue = Json.parse(...)
+
+```
+- Simple path `\`: will return the property corresponding to the field argument, supposing this is a JsObject.
+
+```scala
+(json \ "menu" \ "id").get
+```
+- Recursive path `\\`: \\ operator will do a lookup for the field in the current object and all descendants.
+- Index lookup (for JsArrays)
+
+```scala
+(json \ "menu" \ "popup" \ "menuitem") (1) \ "value"
+```
+]
+---
+
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
